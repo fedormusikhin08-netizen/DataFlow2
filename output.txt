@@ -1,0 +1,51 @@
+=== Блок A: иерархии обобщённых классов ===
+ДАТЧИК ТЕМПЕРАТУРЫ
+ДАТЧИК ВЛАЖНОСТИ
+ДАТЧИК ДАВЛЕНИЯ
+LabeledBuffer.Count = 3
+
+--- GuardedBuffer<Reading>: только неотрицательные показания ---
+Добавлено: 21,5 в 08:00
+TryAdd(21.5) = True
+Отклонено: -3,0 в 08:05
+TryAdd(-3.0) = False
+Count = 1, AcceptedCount = 1 — после отказа
+Добавлено: 24,8 в 12:00
+TryAdd(24.8) = True
+Count = 2, AcceptedCount = 2
+
+--- GuardedBuffer<Sensor>: только с единицей измерения ---
+Добавлено: T1 (°C)
+TryAdd(T1) = True
+Отклонено: T2 ( )
+TryAdd(T2) = False
+Count = 1, AcceptedCount = 1
+Счётчики независимы: readings.AcceptedCount = 2, sensors.AcceptedCount = 1
+
+=== Блок B: обобщённая структура, делегат и метод ===
+Исходная запись: Температура: 21,5
+double → double: По Фаренгейту: 70,7
+double → string: Оценка: прохладно
+Исходная запись: Уровень: 3
+int → int: В процентах: 30
+int → bool: Тревога: True
+
+=== Блок C: обобщённые интерфейсы ===
+GetById(2) = H1
+GetById(99) = null
+GetById(1) у показаний = 21,5
+Счётчики независимы: sensorsRepo.Count = 2, readingsRepo.Count = 1
+IContainer<Animal>.GetItem() = Dog по имени Рекс
+
+=== Блок D: методы расширения ===
+FindMax на List<int> = 9
+FindMax на пустом List<string> = null
+FindMax на пустом List<int> = 0
+FindMax на List<Reading> = 24,8
+Элемент: 5
+Элемент: 9
+Элемент: 2
+Показание: 21,5 в 08:00
+Показание: 24,8 в 12:00
+Показание: 19,2 в 09:00
+(пустой список ничего не напечатал)
